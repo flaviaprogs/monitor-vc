@@ -1,0 +1,85 @@
+:root {
+  --brand: #00d084;          /* verde do projeto */
+  --brand-600: #00b374;
+  --ink-900: #22303f;
+  --ink-700: #2c3e50;
+  --muted: #6c757d;
+}
+
+.logs-page .page-title {
+  font-weight: 600;
+  color: var(--ink-900);
+  margin-bottom: .75rem;
+}
+
+/* Toolbar fixa */
+.log-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  backdrop-filter: saturate(120%) blur(4px);
+}
+
+/* Chips de nível */
+.btn-chip {
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
+  line-height: 1;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #111827;
+  background: #fff;
+}
+.btn-chip.active { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(0,208,132,0.15); }
+.btn-chip.error { }
+.btn-chip.warn { }
+.btn-chip.critical { }
+
+/* Empty */
+.empty-state .empty-icon {
+  display: inline-flex; width: 56px; height: 56px; align-items: center; justify-content: center;
+  border-radius: 50%; background: rgba(0,208,132,.12); color: var(--brand);
+}
+
+/* Result cards (timeline vibe) */
+.result-card {
+  border: 1px solid #eaecef;
+  border-left: 4px solid var(--brand);
+  border-radius: 10px;
+}
+.result-card .card-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #eef2f7;
+  padding: .5rem .75rem;
+}
+.result-card .badge.bg-outline {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111827;
+  font-weight: 600;
+  padding: .25rem .5rem;
+}
+.result-card .file-path { color: var(--muted); }
+.log-snippet {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: .75rem;
+  overflow: auto;
+}
+
+/* Files list */
+.file-list {
+  max-height: 180px;
+  overflow: auto;
+  border: 1px dashed #e5e7eb;
+  border-radius: 8px;
+  padding: .5rem .75rem;
+}

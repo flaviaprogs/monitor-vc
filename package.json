@@ -1,0 +1,70 @@
+{
+  "name": "painel-react-app2",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": ".",
+  "proxy": "http://localhost:4000",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^12.4.1",
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.18",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "js-untar": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.7",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.501.0",
+    "pako": "^2.1.0",
+    "papaparse": "^5.5.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.10",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.0",
+    "recharts": "^2.15.3",
+    "socket.io-client": "^4.8.1",
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "set CI=false && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "tunnel": "localtunnel --port 3000",
+    "dev:api": "npm --prefix api run dev",
+    "dev": "concurrently \"npm run dev:api\" \"react-scripts start\"",
+    "api:migrate": "npm --prefix api run migrate",
+    "api:start": "npm --prefix api run start"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.14",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "http-proxy-middleware": "^3.0.5",
+    "nodemon": "^3.1.10",
+    "react-scripts": "^5.0.1"
+  }
+}

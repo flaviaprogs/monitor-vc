@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Validação de Alarmes Poly</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 20px;
+}
+
+textarea, pre {
+  width: 100%;
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn { background:#2563eb; color:#fff }
+.btn-copy { background:#16a34a; color:#fff }
+.btn-wpp { background:#22c55e; color:#fff }
+.btn-disabled { background:#475569; cursor:not-allowed }
+
+.card {
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:12px;
+  margin-top:20px;
+  background:#020617;
+}
+
+.badge {
+  display:inline-block;
+  padding:4px 8px;
+  border-radius:6px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+.ok { background:#16a34a }
+.warn { background:#f59e0b; color:#000 }
+.err { background:#dc2626 }
+
+.log {
+  margin-top:30px;
+  background:#020617;
+  border:1px solid #334155;
+  border-radius:8px;
+  padding:10px;
+  font-size:13px;
+  max-height:200px;
+  overflow:auto;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📡 Validação Manual de Alarmes – Poly</h2>
+
+<p>Cole os alarmes:</p>
+<textarea id="entrada" rows="8"></textarea><br><br>
+<button class="btn" onclick="processar()">Processar Alarmes</button>
+
+<div id="painel"></div>
+
+<div class="log" id="log"><b>Histórico</b><br></div>
+
+<script>
+const entrada = document.getElementById("entrada");
+const painel = document.getElementById("painel");
+const logDiv = document.getElementById("log");
+
+let alarmes = [];
+
+function processar() {
+  alarmes = [];
+  painel.innerHTML = "";
+
+  const texto = entrada.value;
+  const blocos = texto.split(/\n(?=polylens_|CITTA-|JB-|EG-|SP-)/g);
+
+  blocos.forEach(b => {
+    const idMatch = b.match(/\(([^)]+)\)/);
+    if (!idMatch) return;
+
+    const deviceId = idMatch[1];
+    const local = b.match(/polylens_([^\(]+)/)?.[1] || b.split("\n")[0];
+    const perif = b.match(/Periférico\s*\[([^\]]+)\]/)?.[1] || null;
+
+    alarmes.push({
+      local,
+      deviceId,
+      falha: perif ? "PERIFÉRICO DESCONECTADO" : "STATUS DOWN",
+      perif,
+      status: "AGUARDANDO",
+      sugestao: ""
+    });
+  });
+
+  render();
+}
+
+function render() {
+  painel.innerHTML = "";
+
+  alarmes.forEach((a, i) => {
+    const query = `query {
+  device(id: "${a.deviceId}") {
+    id
+    name
+    connected
+    callStatus
+  }
+}`;
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <span class="badge ${badgeClass(a.status)}">${a.status}</span><br>
+      <b>Sala:</b> ${a.local}<br>
+      <b>Equipamento:</b> ${a.perif || "Codec"}<br>
+      <b>Falha:</b> ${a.falha}<br>
+      <b>Device ID:</b> ${a.deviceId}<br><br>
+
+      <pre>${query}</pre>
+      <button class="btn-copy">Copiar Query</button><br><br>
+
+      <textarea rows="4" placeholder="Cole o JSON da API"></textarea><br>
+      <button class="btn">Analisar</button>
+
+      <p><b>Sugestão:</b> ${a.sugestao || "-"}</p>
+
+      <button class="btn-wpp ${a.status === "CRÍTICO" || a.status === "DESSYNC TC8" ? "" : "btn-disabled"}"
+        ${a.status === "CRÍTICO" || a.status === "DESSYNC TC8" ? "" : "disabled"}>
+        WhatsApp
+      </button>
+    `;
+
+    const copyBtn = div.querySelector(".btn-copy");
+    copyBtn.onclick = () => navigator.clipboard.writeText(query);
+
+    const analisarBtn = div.querySelector(".btn");
+    const textarea = div.querySelector("textarea");
+
+    analisarBtn.onclick = () => analisar(i, textarea.value);
+
+    const wppBtn = div.querySelector(".btn-wpp");
+    wppBtn.onclick = () => enviarWhats(i);
+
+    painel.appendChild(div);
+  });
+}
+
+function analisar(index, jsonTxt) {
+  try {
+    const d = JSON.parse(jsonTxt)?.data?.device;
+    if (!d || d.id !== alarmes[index].deviceId) {
+      alert("JSON inválido ou não corresponde ao device");
+      return;
+    }
+
+    const a = alarmes[index];
+
+    if (!d.connected) {
+      a.status = "CRÍTICO";
+      a.sugestao = "Acionar campo (equipamento offline)";
+    } else if (d.callStatus === "IN_CALL") {
+      a.status = "EM CALL";
+      a.sugestao = "Não intervir";
+    } else if (a.perif && a.perif.includes("TC8")) {
+      a.status = "DESSYNC TC8";
+      a.sugestao = "Reiniciar controlador TC8";
+    } else {
+      a.status = "FALSO";
+      a.sugestao = "Nenhuma ação necessária";
+    }
+
+    log(`${a.local} → ${a.status}`);
+    render();
+
+  } catch {
+    alert("Erro ao ler JSON");
+  }
+}
+
+function enviarWhats(index) {
+  const a = alarmes[index];
+  const msg = `🟣 EQUIPE
+
+Local: ${a.local}
+Equipamento: ${a.perif || "Codec"}
+Falha: ${a.falha}
+
+Diagnóstico:
+${a.status}
+
+Sugestão:
+${a.sugestao}`;
+
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg));
+}
+
+function badgeClass(status) {
+  if (status === "CRÍTICO") return "err";
+  if (status === "DESSYNC TC8") return "warn";
+  if (status === "FALSO") return "ok";
+  return "warn";
+}
+
+function log(t) {
+  logDiv.innerHTML += `${new Date().toLocaleString()} – ${t}<br>`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* === PainelLatenciaRede.css === */
+
+/* Título da página */
+.titulo-pagina {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #003366; /* Azul Globo */
+  margin-bottom: 1rem;
+}
+
+/* Cards principais */
+.card-custom {
+  border-radius: 12px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  background-color: #ffffff;
+}
+
+/* Botão verde no estilo do sistema */
+.btn-custom {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+}
+.btn-custom:hover {
+  background-color: #218838;
+}
+
+/* Indicadores (cards menores) */
+.indicador-card {
+  padding: 1rem;
+  min-height: 110px;
+}
+
+/* Filtros */
+.filtros-card select,
+.filtros-card input {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+/* Gráfico */
+.grafico-card {
+  background-color: #fdfdfd;
+}
+
+/* Tabela */
+.tabela-card .table-custom {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-custom thead th {
+  background-color: #f0f4f8;
+  color: #003366;
+}
+.table-custom tbody tr:hover {
+  background-color: #f8f9fa;
+}
+.table-custom td,
+.table-custom th {
+  padding: 0.65rem;
+  text-align: center;
+}

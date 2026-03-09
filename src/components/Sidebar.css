@@ -1,0 +1,78 @@
+/* === Sidebar Principal === */
+.sidebar {
+  background: #142033;
+  color: #fff;
+  width: 230px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* === Cabeçalho da Sidebar === */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: none;
+}
+
+
+.sidebar-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  line-height: 1.1;
+}
+
+/* === Links de Navegação === */
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.nav a {
+  color: #cbd5e1;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.nav a.active {
+  background: linear-gradient(90deg, #2f80ed, #56ccf2);
+  color: #fff;
+}
+
+/* === Ícones === */
+.icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* === Rodapé (opcional futuro) === */
+.sidebar-footer {
+  padding: 12px 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}

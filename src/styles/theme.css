@@ -1,0 +1,186 @@
+/* =========================
+   Tema global + responsivo
+   ========================= */
+
+/* Paleta e tokens */
+:root{
+  /* Brand (mesma do header) */
+  --brand-1:#2F80ED;
+  --brand-2:#56CCF2;
+
+  /* Neutros */
+  --bg-body:#F5F7FB;
+  --bg-surface:#FFFFFF;
+  --text-strong:#142033;
+  --text:#334155;
+  --muted:#94A3B8;
+  --border:#E2E8F0;
+
+  /* Estados */
+  --success:#16A34A;
+  --danger:#EF4444;
+  --warning:#F59E0B;
+  --info:#06B6D4;
+
+  /* Charts */
+  --c1:#2F80ED; --c2:#56CCF2; --c3:#7C3AED; --c4:#22C55E; --c5:#F59E0B; --c6:#EF4444;
+
+  /* Alturas de gráficos */
+  --chart-h:360px;
+  --chart-h-lg:420px;
+
+  /* Raio e sombra de cartões */
+  --radius:12px;
+  --shadow:0 8px 20px rgba(0,0,0,.04);
+}
+
+/* Ajustes por breakpoint (reduz alturas dos gráficos) */
+@media (max-width: 1200px){ :root{ --chart-h:320px; --chart-h-lg:380px; } }
+@media (max-width: 992px) { :root{ --chart-h:300px; --chart-h-lg:360px; } }
+@media (max-width: 768px) { :root{ --chart-h:260px; --chart-h-lg:320px; } }
+
+/* Base */
+*,
+*::before,
+*::after{ box-sizing:border-box; }
+
+html, body{ height:100%; }
+body{
+  background:var(--bg-body);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ===== Largura total unificada ===== */
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl,
+.container-fluid{
+  max-width:100% !important;
+  width:100% !important;
+}
+
+/* Espaço padrão de página (use em wrappers principais) */
+.page-wrap{
+  width:100%;
+  padding:16px;
+}
+
+/* Cartões suaves */
+.card-soft{
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+/* Títulos de seção */
+.h-section{
+  font-size:1.6rem;
+  font-weight:800;
+  color:var(--text-strong);
+  margin-bottom:8px; /* dá respiro antes dos KPIs */
+}
+
+/* Botão primário com degradê */
+.btn-brand{
+  background:linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:.6rem 1rem;
+  font-weight:700;
+}
+.btn-brand:hover{ filter:brightness(1.05); }
+
+/* Selects claros */
+.select-soft{
+  border:1px solid var(--border)!important;
+  background:#fff!important;
+  color:var(--text)!important;
+  border-radius:10px!important;
+  padding:.55rem .9rem!important;
+}
+
+/* Inputs e botões ocupam 100% no mobile */
+@media (max-width: 768px){
+  .select-soft,
+  .btn,
+  .btn-brand,
+  .form-select,
+  .form-control{ width:100%; }
+}
+
+/* ===== KPIs (mesma linha, largura e altura) ===== */
+.kpi-grid{
+  display:grid;
+  /* Mantém 3 colunas quando cabe e quebra bonito quando não couber */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:12px;
+  margin-top:8px;
+}
+
+.kpi{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  min-height:56px;           /* altura consistente */
+  padding:12px 14px;
+  border-radius:10px;
+  font-weight:700;
+  color:#fff;
+  box-sizing:border-box;      /* evita estourar por padding */
+}
+
+.kpi-title{ font-weight:700; opacity:.95; }
+.kpi-value{ font-weight:800; }
+
+.kpi--success{ background:linear-gradient(90deg, #0ea55f, var(--success)); }
+.kpi--danger { background:linear-gradient(90deg, #f16060, var(--danger)); }
+.kpi--total  { background:linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
+
+/* ===== Filtros em Grid (não empurram KPIs) ===== */
+.filters-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr auto; /* selects + botão */
+  gap:12px;
+  align-items:stretch;
+}
+@media (max-width: 992px){
+  .filters-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 576px){
+  .filters-grid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Grade de gráficos responsiva ===== */
+.charts-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:16px;
+}
+@media (max-width: 992px){
+  .charts-grid{ grid-template-columns:1fr; }
+}
+
+.chart-card{
+  height:var(--chart-h);
+  background:var(--bg-surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:14px;
+  overflow:hidden; /* evita scroll dentro do canvas */
+}
+
+/* Gráfico maior (linha de evolução) */
+.chart-card--lg{ height:var(--chart-h-lg); }
+
+/* Refinos */
+.form-label{ color:var(--text-strong); font-weight:600; }
+.text-muted{ color:var(--muted)!important; }

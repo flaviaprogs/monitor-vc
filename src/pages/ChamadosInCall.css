@@ -1,0 +1,204 @@
+/* 📄 src/pages/ChamadosInCall.css */
+
+/* =========================
+   Paleta (Globo)
+   ========================= */
+:root{
+  --glb-navy: #071D41;     /* azul escuro Globo */
+  --glb-blue: #00A7E1;     /* azul brilho Globo */
+  --glb-purple:#5F259F;    /* roxo Globo */
+  --glb-green:#198754;     /* alinhado ao success do Bootstrap */
+  --glb-yellow:#FFC107;    /* alinhado ao warning do Bootstrap */
+  --glb-red:#DC3545;       /* alinhado ao danger do Bootstrap */
+
+  --card-radius: 1rem;
+  --card-shadow: 0 6px 16px rgba(7,29,65,.08);
+}
+
+/* =========================
+   Área geral
+   ========================= */
+.container-fluid{
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+h4.m-0{
+  color: var(--glb-navy);
+  letter-spacing: .2px;
+}
+
+/* =========================
+   Botões (ajustes suaves)
+   ========================= */
+.btn-dark{
+  background-color: var(--glb-navy);
+  border-color: var(--glb-navy);
+}
+.btn-dark:hover{
+  background-color: #0a2557;
+  border-color: #0a2557;
+}
+
+.btn-outline-success{
+  color: var(--glb-green);
+  border-color: var(--glb-green);
+}
+.btn-outline-success:hover{
+  background-color: var(--glb-green);
+  color: #fff;
+}
+
+.btn-success{
+  background-color: var(--glb-purple);
+  border-color: var(--glb-purple);
+}
+.btn-success:hover{
+  background-color: #4a1e82;
+  border-color: #4a1e82;
+}
+
+.btn-secondary{
+  background-color:#EEF2F7;
+  color:#1f2937;
+  border-color:#e5e7eb;
+}
+.btn-secondary:hover{
+  background-color:#e7ecf3;
+  border-color:#dfe4ec;
+}
+
+/* Ícones nos botões com pequeno espaçamento */
+.btn svg{
+  vertical-align: -2px;
+}
+
+/* =========================
+   Cards & KPIs
+   ========================= */
+.card{
+  border-radius: var(--card-radius) !important;
+  box-shadow: var(--card-shadow);
+  border: 0 !important;
+}
+.card .card-body{
+  padding: .9rem 1rem;
+}
+
+.card.border-0.shadow-sm{
+  box-shadow: var(--card-shadow) !important;
+}
+
+/* KPI: número em destaque */
+.card .card-body strong{
+  font-size: 1.15rem;
+}
+
+/* Títulos de blocos/mini-seções */
+.card .card-body h6{
+  font-weight: 600;
+  color: var(--glb-navy);
+}
+
+/* =========================
+   Badges / Chips
+   ========================= */
+.badge{
+  border-radius: 999px;
+  padding: .35rem .6rem;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.badge.bg-danger{
+  background: linear-gradient(90deg, var(--glb-red), #ff6b6b);
+}
+.badge.bg-secondary{
+  background-color:#64748b !important;
+}
+
+/* Lista de prioritárias (chips em linha) */
+.card .badge.bg-danger small{
+  opacity:.9;
+  font-weight:700;
+}
+
+/* =========================
+   Tabela
+   ========================= */
+.table thead.table-dark{
+  background-color: var(--glb-navy) !important;
+}
+.table thead.table-dark th{
+  border-color: rgba(255,255,255,.12) !important;
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+.table tbody{
+  font-size: .72rem;
+}
+.table tbody tr.table-warning{
+  --bs-table-bg: #fff8e1 !important; /* amarelo suave p/ indevido */
+}
+.table tbody tr.table-success{
+  --bs-table-bg: #eaf7ef !important; /* verde suave p/ encerrado */
+}
+
+/* Sala prioritária em vermelho + estrelinha já vem do JSX,
+   aqui deixamos o tom consistente */
+.text-danger{
+  color: var(--glb-red) !important;
+}
+
+/* Ações da tabela: manter os botões juntinhos */
+td .btn{
+  padding: .125rem .4rem;
+}
+
+/* =========================
+   Filtros
+   ========================= */
+.card .form-label.small{
+  color:#475569;
+}
+.form-check.form-switch .form-check-input{
+  cursor: pointer;
+}
+
+/* =========================
+   Gráficos (contenção leve)
+   ========================= */
+.card .card-body canvas{
+  /* garante que o gráfico não “estoure” verticalmente */
+  max-height: 260px;
+}
+
+/* =========================
+   Modais
+   ========================= */
+.modal-content{
+  border-radius: 16px;
+  border: 0;
+  box-shadow: 0 20px 40px rgba(7,29,65,.15);
+}
+.modal-header{
+  border-bottom: 0;
+}
+.modal-title{
+  color: var(--glb-navy);
+  font-weight: 700;
+}
+.modal-footer{
+  border-top: 0;
+}
+
+/* =========================
+   Responsividade
+   ========================= */
+@media (max-width: 576px){
+  .card .card-body{
+    padding: .8rem .8rem;
+  }
+  h4.m-0{
+    font-size: 1.1rem;
+  }
+}

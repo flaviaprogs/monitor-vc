@@ -1,0 +1,196 @@
+/* ====== MODO TV NOC ====== */
+
+.tv-wrapper {
+  background: radial-gradient(circle at top, #101632 0, #040712 55%, #020308 100%);
+  color: #f8f9fa;
+  min-height: 100vh;
+  padding: 16px 24px 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+.tv-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.tv-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tv-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+.tv-clock {
+  font-size: 1.3rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* KPIs grandões */
+
+.tv-kpi-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.tv-kpi-card {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(6, 10, 30, 0.9);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 18px 35px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tv-kpi-main {
+  background: linear-gradient(135deg, #0044ff, #00c0ff);
+}
+
+.tv-kpi-warn {
+  background: linear-gradient(135deg, #ffb400, #ff7a00);
+}
+
+.tv-kpi-ok {
+  background: linear-gradient(135deg, #00b36b, #00914f);
+}
+
+.tv-kpi-neutral {
+  background: linear-gradient(135deg, #495057, #343a40);
+}
+
+.tv-kpi-dark {
+  background: linear-gradient(135deg, #111827, #020617);
+}
+
+.tv-kpi-label {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tv-kpi-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Grid de sites */
+
+.tv-sites-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.tv-site-card {
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(10, 14, 36, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+.tv-site-status-ok {
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25),
+    0 12px 26px rgba(34, 197, 94, 0.35);
+}
+
+.tv-site-status-atencao {
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.35),
+    0 12px 26px rgba(245, 158, 11, 0.45);
+}
+
+.tv-site-status-critico {
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.45),
+    0 12px 26px rgba(239, 68, 68, 0.6);
+}
+
+.tv-site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.tv-site-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tv-site-badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.tv-badge-ok {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.7);
+}
+
+.tv-badge-atencao {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.75);
+}
+
+.tv-badge-critico {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f97373;
+  border: 1px solid rgba(239, 68, 68, 0.85);
+}
+
+.tv-site-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 10px;
+  margin-top: 4px;
+}
+
+.tv-site-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-site-metric-label {
+  font-size: 0.7rem;
+  opacity: 0.65;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tv-site-metric-value {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Mensagens de vazio / loading */
+
+.tv-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}

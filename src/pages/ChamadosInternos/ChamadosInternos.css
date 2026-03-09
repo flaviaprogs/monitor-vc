@@ -1,0 +1,36 @@
+/* CSS original — correção de especificidade para tabelas Bootstrap */
+
+/* Observação em aberto (pulse amarelo) */
+.row-obs-open td {
+  animation: pulse-yellow 2s ease-in-out infinite !important;
+}
+
+@keyframes pulse-yellow {
+  0%,
+  100% {
+    background-color: #fff3cd;
+  }
+  50% {
+    background-color: #ffffcc;
+  }
+}
+
+/* Reincidência crítica (piscar vermelho) */
+.row-recorrencia-critica td {
+  animation: blink-red 1.5s ease-in-out infinite !important;
+}
+
+@keyframes blink-red {
+  0%,
+  100% {
+    background-color: #ffcccc;
+  }
+  50% {
+    background-color: #ff9999;
+  }
+}
+
+/* Sala instável (alerta fixo) */
+.row-sala-instavel td {
+  background-color: #ffe4b5 !important;
+}

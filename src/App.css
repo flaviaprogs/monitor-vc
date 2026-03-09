@@ -1,0 +1,142 @@
+/* ========= Reset + base ========= */
+* { box-sizing: border-box; }
+:root {
+  /* Globo palette */
+  --glb-deep: #0b1a36;
+  --glb-blue: #2f80ed;
+  --glb-cyan: #56ccf2;
+  --glb-mint: #5ed3b3;
+
+  --glb-bg: #f5f8ff;
+  --glb-text: #0b1a36;
+
+  --card-bg: #ffffff;
+  --card-border: rgba(13,110,253,.08);
+  --muted: #6b7a90;
+}
+
+[data-theme="dark"] {
+  --glb-bg: #0d1117;
+  --glb-text: #e6edf3;
+  --card-bg: #111827;
+  --card-border: rgba(255,255,255,.08);
+  --muted: #9aa7bd;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--glb-bg);
+  color: var(--glb-text);
+  font-family: Arial, sans-serif;
+}
+
+/* ========= Navbar (Bootstrap) ========= */
+nav.navbar { margin-bottom: 2rem; }
+
+/* ========= Layout full-viewport ========= */
+.layout {
+  min-height: 100vh;         /* ocupa a tela toda */
+  display: flex;
+  overflow: hidden;          /* evita rolagem dupla */
+}
+
+.layout main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;              /* charts/grids não estouram */
+  background: var(--glb-bg);
+}
+
+/* Topbar fixa */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--glb-deep), var(--glb-blue) 50%, var(--glb-cyan));
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+}
+
+.content-wrap {
+  flex: 1 1 auto;            /* cresce para preencher */
+  min-height: 0;             /* 🔑 permite scroll interno */
+  overflow: auto;
+  padding: 16px;
+}
+
+/* ========= Páginas que devem ocupar a área útil ========= */
+.container-wide { max-width: 100% !important; }  /* use quando quiser 100% largura */
+.page-stretch  { min-height: calc(100vh - 56px - 16px - 16px); } /* se usar fora do Layout */
+
+/* padrão recomendado para páginas dentro do Layout */
+.page {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========= Grid elástica para “preencher tudo” abaixo dos filtros ========= */
+.fill-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  gap: 12px;
+  grid-template-rows: 300px 300px 1fr; /* 2 linhas fixas (charts) + 1 elástica (tabela) */
+}
+
+@media (max-width: 992px) {
+  .fill-area { grid-template-rows: 260px 260px 1fr; }
+}
+
+/* ========= Cartões ========= */
+.card-glb,
+.card-flex {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+.card-flex {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.card-flex__head { padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,.06); }
+.card-flex__body { padding: 10px 12px; flex: 1 1 auto; min-height: 0; }
+.card-flex__body--scroll { overflow: auto; }
+
+/* Contêiner para Chart.js ocupar 100% do card */
+.chart-grow { height: 100%; min-height: 0; }
+
+/* ========= Hero / cabeçalhos ========= */
+.hero-globo {
+  background: linear-gradient(90deg, var(--glb-deep), var(--glb-blue) 50%, var(--glb-cyan));
+  color: #fff;
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 8px 24px rgba(13, 110, 253, .25);
+}
+
+/* ========= Botões ========= */
+.btn-glb {
+  background: var(--glb-blue);
+  border-color: var(--glb-blue);
+  color: #fff;
+}
+.btn-glb:hover { filter: brightness(1.05); }
+
+/* ========= Utilitários ========= */
+.text-muted-2 { color: var(--muted); }
